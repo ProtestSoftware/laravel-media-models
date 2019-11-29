@@ -31,7 +31,7 @@ class Media extends Model
     {
         return Storage::temporaryUrl(
             $this->path,
-            $minutes,
+            now()->addMinutes($minutes),
             $requestParams
         );
     }
