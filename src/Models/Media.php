@@ -35,4 +35,14 @@ class Media extends Model
             $requestParams
         );
     }
+
+    public function getInlineUrl(int $minutes = 5)
+    {
+        return $this->getTemporaryUrl($minutes,  ['ResponseContentDisposition' => " inline; filename='$this->name' "]);
+    }
+
+    public function getAttachmentUrl(int $minutes = 5)
+    {
+        return $this->getTemporaryUrl($minutes,  ['ResponseContentDisposition' => " attachment; filename='$this->name' "]);
+    }
 }
