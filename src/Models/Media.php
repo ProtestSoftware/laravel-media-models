@@ -27,11 +27,12 @@ class Media extends Model
         return $this->morphTo();
     }
 
-    public function getTemporaryUrl(int $minutes = 5)
+    public function getTemporaryUrl(int $minutes = 5, array $requestParams = [])
     {
         return Storage::temporaryUrl(
             $this->path,
-            $minutes
+            $minutes,
+            $requestParams
         );
     }
 }
