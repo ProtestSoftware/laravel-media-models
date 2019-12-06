@@ -3,6 +3,7 @@
 namespace ProtestSoftware\LaravelMediaModels\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ProtestSoftware\LaravelMediaModels\Http\Resources\MediaResource;
 use ProtestSoftware\LaravelMediaModels\Models\Media;
 
 class MediaController extends Controller
@@ -18,6 +19,6 @@ class MediaController extends Controller
 
         $media = Media::create($validated);
 
-        return response()->json(['data' => $media]);
+        return new MediaResource($media);
     }
 }
