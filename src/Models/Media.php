@@ -17,8 +17,12 @@ class Media extends Model
         parent::boot();
 
         static::creating(function (Media $media) {
-            if (!$media->mime_type) $media->mime_type = Storage::mimeType($media->path);
-            if (!$media->file_size) $media->file_size = Storage::size($media->path);
+            if (!$media->mime_type) {
+                $media->mime_type = Storage::mimeType($media->path);
+            }
+            if (!$media->file_size) {
+                $media->file_size = Storage::size($media->path);
+            }
         });
     }
 
@@ -38,11 +42,11 @@ class Media extends Model
 
     public function getInlineUrl(int $minutes = 5)
     {
-        return $this->getTemporaryUrl($minutes,  ['ResponseContentDisposition' => " inline; filename='$this->name' "]);
+        return $this->getTemporaryUrl($minutes, ['ResponseContentDisposition' => " inline; filename='$this->name' "]);
     }
 
     public function getAttachmentUrl(int $minutes = 5)
     {
-        return $this->getTemporaryUrl($minutes,  ['ResponseContentDisposition' => " attachment; filename='$this->name' "]);
+        return $this->getTemporaryUrl($minutes, ['ResponseContentDisposition' => " attachment; filename=$this->name "]);
     }
 }
